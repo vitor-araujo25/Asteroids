@@ -15,8 +15,8 @@ public class AsteroidsGame implements Jogo{
             asts[i] = new Asteroide(800 * Math.random(), //x
                     600 * Math.random(),  //y
                     ThreadLocalRandom.current().nextInt(1, 5), //tamanho
-                    Math.random()*200, //velocidade_x
-                    Math.random()*200, //velocidade_y
+                    Math.random()*50 + 100, //velocidade_x
+                    Math.random()*50 + 100, //velocidade_y
                     new Cor(Math.random(), Math.random(), Math.random()) //cor
             );
         }
