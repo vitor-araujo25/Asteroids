@@ -39,6 +39,7 @@ public class AsteroidsGame implements Jogo{
         for(Asteroide a: asts){
             a.move(dt,getLargura(),getAltura());
         }
+
     }
 
     public void desenhar(Tela tela){
@@ -49,7 +50,7 @@ public class AsteroidsGame implements Jogo{
     }
 
     public void tecla(String tecla){
-
+        nave.mover(tecla);
     }
 
     public static void main(String[] args){

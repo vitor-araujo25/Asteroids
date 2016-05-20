@@ -25,4 +25,9 @@ public class Ponto {
     public void setY(double y) {
         this.y = y;
     }
+
+    public void rotacionar(double dir){
+        x = x * Math.cos(dir) - y * Math.sin(dir);
+        y = y * Math.cos(dir) + x * Math.sin(dir);
+    }
 }

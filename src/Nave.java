@@ -17,14 +17,22 @@ public class Nave {
 
     public void desenhar(Tela t){
         Ponto p1,p2,p3;
-        p1 = new Ponto(centro.getX()+5,centro.getY());
-        p2 = new Ponto(centro.getX()-3,centro.getY()-4);
-        p3 = new Ponto(centro.getX()-3,centro.getY()+4);
+        p1 = new Ponto(centro.getX()+12,centro.getY());
+        p2 = new Ponto(centro.getX()-10,centro.getY()-11);
+        p3 = new Ponto(centro.getX()-10,centro.getY()+11);
         t.triangulo(p1.getX(),p1.getY(),
                 p2.getX(),p2.getY(),
                 p3.getX(),p3.getY(),
                 cor
         );
+    }
+
+    public void mover(String tecla){
+
+    }
+
+    public void giraNave(double dt){
+
     }
 
     public double getVx() {

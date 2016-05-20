@@ -21,31 +21,6 @@ import java.awt.event.ActionListener;
 import java.awt.Canvas;
 
 /**
- * Motor do jogo, gerencia a parte gráfica e os eventos
- */
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferStrategy;
-import java.util.HashSet;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.AudioSystem;
-import java.io.File;
-import javax.swing.Timer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.Canvas;
-
-/**
  * Motor do jogo, gerencia a parte grÃ¡fica e os eventos
  */
 public class Motor
