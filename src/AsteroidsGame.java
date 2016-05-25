@@ -15,8 +15,8 @@ public class AsteroidsGame implements Jogo{
             asts[i] = new Asteroide(800 * Math.random(), //x
                     600 * Math.random(),  //y
                     ThreadLocalRandom.current().nextInt(1, 5), //tamanho
-                    Math.random()*50 + 100, //velocidade_x
-                    Math.random()*50 + 100, //velocidade_y
+                    Math.pow((-1),ThreadLocalRandom.current().nextInt(1, 3))*(Math.random()*50 + 50), //velocidade_x
+                    Math.pow((-1),ThreadLocalRandom.current().nextInt(1, 3))*(Math.random()*50 + 50), //velocidade_y
                     new Cor(Math.random(), Math.random(), Math.random()) //cor
             );
         }
@@ -39,7 +39,9 @@ public class AsteroidsGame implements Jogo{
         for(Asteroide a: asts){
             a.move(dt,getLargura(),getAltura());
         }
-
+        nave.mover(dt);
+        nave.acelera(teclas);
+        nave.giraNave(teclas, dt);
     }
 
     public void desenhar(Tela tela){
@@ -50,7 +52,8 @@ public class AsteroidsGame implements Jogo{
     }
 
     public void tecla(String tecla){
-        nave.mover(tecla);
+
+
     }
 
     public static void main(String[] args){
