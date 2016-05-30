@@ -32,7 +32,7 @@ public class Nave {
     }
 
     public void acelera(Set<String> t){
-        if(t.equals("up") || t.contains("acima")) {
+        if(t.contains("up") || t.contains("acima")) {
             vx += Math.cos(angulo)*100;
             vy += Math.sin(angulo)*100;
         }
@@ -40,7 +40,6 @@ public class Nave {
             vx -= Math.cos(angulo)*100;
             vy -= Math.sin(angulo)*100;
         }
-
     }
 
     public void mover(double dt){
@@ -50,15 +49,15 @@ public class Nave {
 
     public void giraNave(Set<String> t, double dt){
         if(t.contains("left") || t.contains("esquerda")){
-            for(Ponto p: vertices){
-                p.rotacionar(2*Math.PI*dt);
-            }
             angulo += 2*Math.PI*dt;
-        }else if(t.contains("right") || t.contains("direita")){
             for(Ponto p: vertices){
-                p.rotacionar(-2*Math.PI*dt);
+                p.rotacionar(angulo);
             }
+        }else if(t.contains("right") || t.contains("direita")){
             angulo -= 2*Math.PI*dt;
+            for(Ponto p: vertices){
+                p.rotacionar(angulo);
+            }
         }
     }
 
