@@ -20,7 +20,7 @@ public class AsteroidsGame implements Jogo{
                     new Cor(Math.random(), Math.random(), Math.random()) //cor
             );
         }
-        nave = new Nave((double)getLargura()/2,(double)getAltura()/2,0.0,0.0,0.0);
+        nave = new Nave((double)getLargura()/2,(double)getAltura()/2,0.0,0.0);
     }
 
     public String getTitulo(){
@@ -39,7 +39,7 @@ public class AsteroidsGame implements Jogo{
         for(Asteroide a: asts){
             a.move(dt,getLargura(),getAltura());
         }
-        nave.mover(dt);
+        nave.mover(this.getAltura(),this.getLargura(),dt);
         nave.acelera(teclas);
         nave.giraNave(teclas, dt);
     }

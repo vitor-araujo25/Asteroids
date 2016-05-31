@@ -15,7 +15,7 @@ public class Asteroide {
         this.setCor(cor);
         this.setVx(vx);
         this.setVy(vy);
-        this.setRaio((20*tam)/2);
+        this.setRaio((15*tam)/2);
     }
 
     public void desenhar(Tela t){

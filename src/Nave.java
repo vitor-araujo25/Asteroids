@@ -6,32 +6,43 @@ import java.util.Set;
 
 public class Nave {
     private Ponto centro;
-    private Ponto[] vertices;
     private double vx;
     private double vy;
     private double angulo;
     public static final Cor cor = new Cor("branco");
 
-    public Nave(double x, double y, double vx, double vy, double angulo){
-        vertices = new Ponto[3];
-        vertices[0] = new Ponto(20,0);
-        vertices[1] = new Ponto(-10,-11);
-        vertices[2] = new Ponto(-10,11);
+    public Nave(double x, double y, double vx, double vy){
         centro = new Ponto(x,y);
-        this.setVx(vx);
-        this.setVy(vy);
-        this.setAngulo(angulo);
+        this.vx = vx;
+        this.vy = vy;
+        this.angulo = 0.0;
     }
 
     public void desenhar(Tela t){
-        Ponto[] verticesTela = new Ponto[3];
-        for(int i = 0; i < verticesTela.length; i++){
-            verticesTela[i] = new Ponto(centro.soma(vertices[i]));
+        Ponto[] vertices = new Ponto[3];
+        vertices[0] = new Ponto(10,0);
+        vertices[1] = new Ponto(-8,-9);
+        vertices[2] = new Ponto(-8,9);
+
+        for(Ponto p: vertices){
+            p.rotacionar(angulo);
         }
-        t.triangulo(verticesTela[0].getX(),verticesTela[0].getY(),
-                    verticesTela[1].getX(),verticesTela[1].getY(),
-                    verticesTela[2].getX(),verticesTela[2].getY(),
-                cor
+
+        t.triangulo(vertices[0].getX()+centro.getX(),
+                    vertices[0].getY()+centro.getY(),
+                    vertices[1].getX()+centro.getX(),
+                    vertices[1].getY()+centro.getY(),
+                    vertices[2].getX()+centro.getX(),
+                    vertices[2].getY()+centro.getY(),
+                    cor
+        );
+
+        t.triangulo(centro.getX(),centro.getY(),
+                    vertices[1].getX()+centro.getX(),
+                    vertices[1].getY()+centro.getY(),
+                    vertices[2].getX()+centro.getX(),
+                    vertices[2].getY()+centro.getY(),
+                    new Cor(0,0,0)
         );
     }
 
@@ -41,27 +52,36 @@ public class Nave {
             vy += Math.sin(angulo)*100;
         }
         if(t.contains("down") || t.contains("abaixo")){
-            vx -= Math.cos(angulo)*100;
-            vy -= Math.sin(angulo)*100;
+            vx += -Math.cos(angulo)*100;
+            vy += -Math.sin(angulo)*100;
         }
     }
 
-    public void mover(double dt){
+    public void mover(int altTela, int largTela, double dt){
+
+
         centro.setX(centro.getX() + vx*dt);
         centro.setY(centro.getY() + vx*dt);
+
+        if(centro.getY() > altTela+5){
+            centro.setY(-5);
+        }
+        if(centro.getY() < -5){
+            centro.setY(altTela+5);
+        }
+        if(centro.getX() > largTela+5){
+            centro.setX(-5);
+        }
+        if(centro.getX() < -5){
+            centro.setX(largTela+5);
+        }
     }
 
     public void giraNave(Set<String> t, double dt){
         if(t.contains("left") || t.contains("esquerda")){
-            angulo += 2*Math.PI*dt;
-            for(Ponto p: vertices){
-                p.rotacionar(angulo);
-            }
-        }else if(t.contains("right") || t.contains("direita")){
-            angulo -= 2*Math.PI*dt;
-            for(Ponto p: vertices){
-                p.rotacionar(angulo);
-            }
+            angulo -= Math.PI*dt;
+        }if(t.contains("right") || t.contains("direita")){
+            angulo += Math.PI*dt;
         }
     }
 

@@ -35,14 +35,16 @@ public class Ponto {
     }
 
     public void rotacionar(double dir) {
-        x = (x * Math.cos(dir)) - (y * Math.sin(dir));
-        y = (y * Math.cos(dir)) + (x * Math.sin(dir));
+        double tempX = x*Math.cos(dir) - y*Math.sin(dir);
+        double tempY = y*Math.cos(dir) + x*Math.sin(dir);
+        x = tempX;
+        y = tempY;
     }
 
     public ArrayList<Double> soma(Ponto p){
         ArrayList<Double> pontos = new ArrayList<>();
-        pontos.set(0,this.x+p.getX());
-        pontos.set(1,this.y+p.getY());
+        pontos.add(this.x+p.getX());
+        pontos.add(this.y+p.getY());
 
         return pontos;
     }
