@@ -5,8 +5,8 @@
 import java.util.Set;
 
 public class Nave {
-    Ponto centro;
-    Ponto[] vertices;
+    private Ponto centro;
+    private Ponto[] vertices;
     private double vx;
     private double vy;
     private double angulo;
@@ -14,19 +14,23 @@ public class Nave {
 
     public Nave(double x, double y, double vx, double vy, double angulo){
         vertices = new Ponto[3];
+        vertices[0] = new Ponto(20,0);
+        vertices[1] = new Ponto(-10,-11);
+        vertices[2] = new Ponto(-10,11);
         centro = new Ponto(x,y);
-        vertices[0] = new Ponto(centro.getX()+20,centro.getY());
-        vertices[1] = new Ponto(centro.getX()-10,centro.getY()-11);
-        vertices[2] = new Ponto(centro.getX()-10,centro.getY()+11);
         this.setVx(vx);
         this.setVy(vy);
         this.setAngulo(angulo);
     }
 
     public void desenhar(Tela t){
-        t.triangulo(vertices[0].getX(),vertices[0].getY(),
-                vertices[1].getX(),vertices[1].getY(),
-                vertices[2].getX(),vertices[2].getY(),
+        Ponto[] verticesTela = new Ponto[3];
+        for(int i = 0; i < verticesTela.length; i++){
+            verticesTela[i] = new Ponto(centro.soma(vertices[i]));
+        }
+        t.triangulo(verticesTela[0].getX(),verticesTela[0].getY(),
+                    verticesTela[1].getX(),verticesTela[1].getY(),
+                    verticesTela[2].getX(),verticesTela[2].getY(),
                 cor
         );
     }
