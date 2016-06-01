@@ -1,7 +1,6 @@
 /**
  * Created by Vitor on 19/05/2016.
  */
-import java.util.ArrayList;
 
 public class Ponto {
     private double x;
@@ -10,11 +9,6 @@ public class Ponto {
     public Ponto(double x, double y){
         this.x = x;
         this.y = y;
-    }
-
-    public Ponto(ArrayList<Double> pontos){
-        this.x = pontos.get(0);
-        this.y = pontos.get(1);
     }
 
 
@@ -39,13 +33,5 @@ public class Ponto {
         double tempY = y*Math.cos(dir) + x*Math.sin(dir);
         x = tempX;
         y = tempY;
-    }
-
-    public ArrayList<Double> soma(Ponto p){
-        ArrayList<Double> pontos = new ArrayList<>();
-        pontos.add(this.x+p.getX());
-        pontos.add(this.y+p.getY());
-
-        return pontos;
     }
 }

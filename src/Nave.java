@@ -1,10 +1,7 @@
 /**
  * Created by Vitor on 19/05/2016.
  */
-
-import java.util.Set;
-
-public class Nave {
+public class Nave implements ObjetoJogo{
     private Ponto centro;
     private double vx;
     private double vy;
@@ -18,6 +15,7 @@ public class Nave {
         this.angulo = 0.0;
     }
 
+    @Override
     public void desenhar(Tela t){
         Ponto[] vertices = new Ponto[3];
         vertices[0] = new Ponto(10,0);
@@ -46,22 +44,32 @@ public class Nave {
         );
     }
 
-    public void acelera(Set<String> t){
-        if(t.contains("up") || t.contains("acima")) {
-            vx += Math.cos(angulo)*100;
-            vy += Math.sin(angulo)*100;
-        }
-        if(t.contains("down") || t.contains("abaixo")){
-            vx += -Math.cos(angulo)*100;
-            vy += -Math.sin(angulo)*100;
+    public void acelera(){
+        vx += Math.cos(angulo);
+        vy += Math.sin(angulo);
+    }
+
+    public void atritoX(){
+        if(vx > 0){
+            vx -= 1;
+        }else{
+            vx += 1;
         }
     }
 
+    public void atritoY(){
+        if(vy > 0){
+            vy -= 1;
+        }else{
+            vy += 1;
+        }
+
+    }
+
+    @Override
     public void mover(int altTela, int largTela, double dt){
-
-
         centro.setX(centro.getX() + vx*dt);
-        centro.setY(centro.getY() + vx*dt);
+        centro.setY(centro.getY() + vy*dt);
 
         if(centro.getY() > altTela+5){
             centro.setY(-5);
@@ -77,12 +85,12 @@ public class Nave {
         }
     }
 
-    public void giraNave(Set<String> t, double dt){
-        if(t.contains("left") || t.contains("esquerda")){
-            angulo -= Math.PI*dt;
-        }if(t.contains("right") || t.contains("direita")){
-            angulo += Math.PI*dt;
-        }
+    public void giraEsquerda(double dt){
+        angulo -= Math.PI*dt;
+    }
+
+    public void giraDireita(double dt){
+        angulo += Math.PI*dt;
     }
 
     public double getVx() {
@@ -107,5 +115,13 @@ public class Nave {
 
     public void setAngulo(double angulo) {
         this.angulo = angulo;
+    }
+
+    public Ponto getCentro() {
+        return centro;
+    }
+
+    public void setCentro(Ponto centro) {
+        this.centro = centro;
     }
 }

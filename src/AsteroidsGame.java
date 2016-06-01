@@ -1,3 +1,5 @@
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -8,6 +10,7 @@ public class AsteroidsGame implements Jogo{
 
     Asteroide[] asts;
     Nave nave;
+    Set<Tiro> tiros;
 
     public AsteroidsGame() {
         asts = new Asteroide[6];
@@ -21,6 +24,7 @@ public class AsteroidsGame implements Jogo{
             );
         }
         nave = new Nave((double)getLargura()/2,(double)getAltura()/2,0.0,0.0);
+        tiros = new HashSet<>();
     }
 
     public String getTitulo(){
@@ -37,22 +41,48 @@ public class AsteroidsGame implements Jogo{
 
     public void tique(Set<String> teclas, double dt){
         for(Asteroide a: asts){
-            a.move(dt,getLargura(),getAltura());
+            a.mover(getAltura(),getLargura(),dt);
+        }
+        if(teclas.contains("left") || teclas.contains("esquerda")){
+            nave.giraEsquerda(dt);
+        }
+        if(teclas.contains("right") || teclas.contains("direita")){
+            nave.giraDireita(dt);
+        }
+        if(teclas.contains("up") || teclas.contains("acima")) {
+            nave.acelera();
+        }else{
+            if(nave.getVx() != 0){
+                nave.atritoX();
+            }
+            if(nave.getVy() != 0){
+                nave.atritoY();
+            }
+        }
+        for(Iterator<Tiro> it = tiros.iterator(); it.hasNext();){
+            Tiro t = it.next();
+            t.mover(getAltura(),getLargura(),dt);
+            if(t.removeFlag){
+                it.remove();
+            }
         }
         nave.mover(this.getAltura(),this.getLargura(),dt);
-        nave.acelera(teclas);
-        nave.giraNave(teclas, dt);
     }
 
     public void desenhar(Tela tela){
+        nave.desenhar(tela);
         for(Asteroide a: asts){
             a.desenhar(tela);
         }
-        nave.desenhar(tela);
+        for(Tiro t: tiros){
+            t.desenhar(tela);
+        }
     }
 
     public void tecla(String tecla){
-
+        if(tecla.equals("space") || tecla.equals("espaço")){
+            tiros.add(new Tiro(nave));
+        }
 
     }
 

@@ -1,8 +1,8 @@
 /**
  * Created by vitor on 18/05/16.
  */
-public class Asteroide {
-    Ponto centro;
+public class Asteroide implements ObjetoJogo{
+    private Ponto centro;
     private int tam;
     private Cor cor;
     private double vx;
@@ -18,11 +18,13 @@ public class Asteroide {
         this.setRaio((15*tam)/2);
     }
 
+    @Override
     public void desenhar(Tela t){
         t.circulo(centro.getX(), centro.getY(), raio, cor);
     }
 
-    public void move(double dt, int largTela, int altTela){
+    @Override
+    public void mover(int altTela, int largTela, double dt){
         centro.setX(centro.getX() + vx*dt);
         centro.setY(centro.getY() + vy*dt);
         if(centro.getY() > altTela+raio){
@@ -77,5 +79,13 @@ public class Asteroide {
 
     public void setRaio(int raio) {
         this.raio = raio;
+    }
+
+    public Ponto getCentro() {
+        return centro;
+    }
+
+    public void setCentro(Ponto centro) {
+        this.centro = centro;
     }
 }
