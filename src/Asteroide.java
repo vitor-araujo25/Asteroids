@@ -14,6 +14,7 @@ public class Asteroide extends ObjetoJogo{
         this.vx = vx;
         this.vy = vy;
         this.raio = (15*tam)/2;
+        this.hb = new Hitbox(this);
     }
 
     @Override
