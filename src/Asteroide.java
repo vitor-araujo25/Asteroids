@@ -40,6 +40,13 @@ public class Asteroide extends ObjetoJogo{
         }
     }
 
+    public void divide(){
+        System.out.println("Chameeei!");
+//        if(tam == 1 || tam == 2){
+//
+//        }
+    }
+
     public int getTam() {
         return tam;
     }

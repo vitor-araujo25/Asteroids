@@ -12,9 +12,10 @@ public class Hitbox {
     public void distancia(ObjetoJogo obj){
         switch(obj.getClass().getName()){
             case "Tiro":
-                if(Math.sqrt(Math.pow(a.getCentro().getX()-obj.getCentro().getX(),2) +
-                        Math.pow(a.getCentro().getY()-obj.getCentro().getY(),2)) < a.getRaio()){
+                if(Math.sqrt(Math.pow((a.getCentro().getX()-obj.getCentro().getX()),2) +
+                        Math.pow((a.getCentro().getY()-obj.getCentro().getY()),2)) < a.getRaio()){
                     bateu = true;
+                    ((Tiro)obj).removeFlag = true;
                 }
                 break;
             case "Nave":

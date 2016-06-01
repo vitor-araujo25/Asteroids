@@ -1,6 +1,7 @@
 /**
  * Created by Vitor on 31/05/2016.
  */
+
 public abstract class ObjetoJogo {
     protected Ponto centro;
     protected double vy;

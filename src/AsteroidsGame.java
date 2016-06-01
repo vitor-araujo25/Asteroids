@@ -1,27 +1,28 @@
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 /**
  * Created by vitor on 18/05/16.
  */
 public class AsteroidsGame implements Jogo{
 
-    Asteroide[] asts;
+    Set<Asteroide> asteroides;
     Nave nave;
     Set<Tiro> tiros;
+    public static Random generator = new Random();
 
     public AsteroidsGame() {
-        asts = new Asteroide[6];
+        asteroides = new HashSet<>();
         for(int i = 0; i < 6; i++) {
-            asts[i] = new Asteroide(800 * Math.random(), //x
+            asteroides.add(new Asteroide(800 * Math.random(), //x
                     600 * Math.random(),  //y
-                    ThreadLocalRandom.current().nextInt(1, 5), //tamanho
-                    Math.pow((-1),ThreadLocalRandom.current().nextInt(1, 3))*(Math.random()*50 + 80), //velocidade_x
-                    Math.pow((-1),ThreadLocalRandom.current().nextInt(1, 3))*(Math.random()*50 + 80), //velocidade_y
-                    new Cor(Math.random(), Math.random(), Math.random()) //cor
-            );
+                    generator.nextInt(4)+1, //tamanho
+                    Math.pow((-1),generator.nextInt(2))*(Math.random()*50 + 80), //velocidade_x
+                    Math.pow((-1),generator.nextInt(2))*(Math.random()*50 + 80), //velocidade_y
+                    new Cor(generator.nextInt(236)+20, generator.nextInt(236)+20, generator.nextInt(236)+20) //cor
+            ));
         }
         nave = new Nave((double)getLargura()/2,(double)getAltura()/2,0.0,0.0);
         tiros = new HashSet<>();
@@ -40,7 +41,7 @@ public class AsteroidsGame implements Jogo{
     }
 
     public void tique(Set<String> teclas, double dt){
-        for(Asteroide a: asts){
+        for(Asteroide a: asteroides){
             a.mover(getAltura(),getLargura(),dt);
         }
         if(teclas.contains("left") || teclas.contains("esquerda") || teclas.contains("a")){
@@ -59,11 +60,20 @@ public class AsteroidsGame implements Jogo{
                 nave.atritoY();
             }
         }
-        for(Iterator<Tiro> it = tiros.iterator(); it.hasNext();){
-            Tiro t = it.next();
-            t.mover(getAltura(),getLargura(),dt);
-            if(t.removeFlag){
-                it.remove();
+        if(tiros.size() != 0){
+            for(Iterator<Tiro> itTiros = tiros.iterator(); itTiros.hasNext();){
+                Tiro t = itTiros.next();
+                t.mover(getAltura(),getLargura(),dt);
+                for(Iterator<Asteroide> itAst = asteroides.iterator(); itAst.hasNext();){
+                    Asteroide a = itAst.next();
+                    a.getHb().distancia(t);
+                    if(a.getHb().getBateu()){
+                        a.divide(); //TODO: Remover o asteroide com bateu ligado e criar outros se necessario
+                    }
+                }
+                if(t.removeFlag){
+                    itTiros.remove();
+                }
             }
         }
         nave.mover(this.getAltura(),this.getLargura(),dt);
@@ -71,7 +81,7 @@ public class AsteroidsGame implements Jogo{
 
     public void desenhar(Tela tela){
         nave.desenhar(tela);
-        for(Asteroide a: asts){
+        for(Asteroide a: asteroides){
             a.desenhar(tela);
         }
         for(Tiro t: tiros){

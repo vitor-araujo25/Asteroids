@@ -52,19 +52,34 @@ public class Nave extends ObjetoJogo{
 
     public void atritoX(){
         if(vx > 0){
-            vx -= 1;
+            if(vx < 1){
+                vx = 0;
+            }else{
+                vx -= 1;
+            }
         }else{
-            vx += 1;
+            if(vx > -1){
+                vx = 0;
+            }else{
+                vx += 1;
+            }
         }
     }
 
     public void atritoY(){
         if(vy > 0){
-            vy -= 1;
+            if(vy < 1){
+                vy = 0;
+            }else{
+                vy -= 1;
+            }
         }else{
-            vy += 1;
+            if(vy > -1){
+                vy = 0;
+            }else{
+                vy += 1;
+            }
         }
-
     }
 
     @Override
