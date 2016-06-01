@@ -1,3 +1,5 @@
+import java.util.Set;
+
 /**
  * Created by vitor on 18/05/16.
  */
@@ -40,11 +42,27 @@ public class Asteroide extends ObjetoJogo{
         }
     }
 
-    public void divide(){
-        System.out.println("Chameeei!");
-//        if(tam == 1 || tam == 2){
-//
-//        }
+    public void geraNovos(Set<Asteroide> fila){
+        if(tam == 3){
+            fila.add(new Asteroide(
+                    centro.getX(),centro.getY(),1,
+                    vx,vy,cor
+            ));
+            fila.add(new Asteroide(
+                    centro.getX(),centro.getY(),1,
+                    -vx,-vy,cor
+            ));
+        }
+        if(tam == 4){
+            fila.add(new Asteroide(
+                    centro.getX(),centro.getY(),2,
+                    vx,vy,cor
+            ));
+            fila.add(new Asteroide(
+                    centro.getX(),centro.getY(),1,
+                    -vx,-vy,cor
+            ));
+        }
     }
 
     public int getTam() {

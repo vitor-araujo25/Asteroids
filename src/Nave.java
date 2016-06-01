@@ -101,6 +101,12 @@ public class Nave extends ObjetoJogo{
         }
     }
 
+    public void reset(int altTela, int largTela){
+        centro.setX((double)largTela/2);
+        centro.setY((double)altTela/2);
+        angulo = vx = vy = 0;
+    }
+
     public void giraEsquerda(double dt){
         angulo -= Math.PI*dt;
     }

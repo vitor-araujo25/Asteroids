@@ -8,13 +8,18 @@ import java.util.Random;
  */
 public class AsteroidsGame implements Jogo{
 
-    Set<Asteroide> asteroides;
+    Set<Asteroide> asteroides,filaAsteroides;
     Nave nave;
     Set<Tiro> tiros;
     public static Random generator = new Random();
+    public static int vidas = 3;
+    public static int score = 3;
+    public static boolean gameOver = false;
+
 
     public AsteroidsGame() {
         asteroides = new HashSet<>();
+        filaAsteroides = new HashSet<>();
         for(int i = 0; i < 6; i++) {
             asteroides.add(new Asteroide(800 * Math.random(), //x
                     600 * Math.random(),  //y
@@ -41,16 +46,17 @@ public class AsteroidsGame implements Jogo{
     }
 
     public void tique(Set<String> teclas, double dt){
-        for(Asteroide a: asteroides){
-            a.mover(getAltura(),getLargura(),dt);
-        }
         if(teclas.contains("left") || teclas.contains("esquerda") || teclas.contains("a")){
+            System.out.println("angulo: "+nave.getAngulo());
             nave.giraEsquerda(dt);
         }
         if(teclas.contains("right") || teclas.contains("direita") || teclas.contains("d")){
+            System.out.println("angulo: "+nave.getAngulo());
             nave.giraDireita(dt);
         }
         if(teclas.contains("up") || teclas.contains("acima") || teclas.contains("w")) {
+            System.out.println("vx: "+nave.getVx()+", vy: "+nave.getVy());
+            System.out.println("x: "+nave.getCentro().getX()+", y: "+nave.getCentro().getY());
             nave.acelera();
         }else{
             if(nave.getVx() != 0){
@@ -67,8 +73,9 @@ public class AsteroidsGame implements Jogo{
                 for(Iterator<Asteroide> itAst = asteroides.iterator(); itAst.hasNext();){
                     Asteroide a = itAst.next();
                     a.getHb().distancia(t);
-                    if(a.getHb().getBateu()){
-                        a.divide(); //TODO: Remover o asteroide com bateu ligado e criar outros se necessario
+                    if(a.getHb().getDestruido()){
+                        a.geraNovos(filaAsteroides);
+                        itAst.remove();
                     }
                 }
                 if(t.removeFlag){
@@ -76,7 +83,20 @@ public class AsteroidsGame implements Jogo{
                 }
             }
         }
-        nave.mover(this.getAltura(),this.getLargura(),dt);
+        for(Iterator<Asteroide> it = filaAsteroides.iterator(); it.hasNext();){
+            Asteroide a = it.next();
+            asteroides.add(a);
+            it.remove();
+        }
+        for(Asteroide a: asteroides){
+            a.mover(getAltura(),getLargura(),dt);
+            a.getHb().distancia(nave);
+            if(a.getHb().getColisaoNave()){
+                vidas--;
+                nave.reset(getAltura(),getLargura());
+            }
+        }
+        nave.mover(getAltura(),getLargura(),dt);
     }
 
     public void desenhar(Tela tela){
