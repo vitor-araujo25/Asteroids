@@ -1,18 +1,15 @@
 /**
  * Created by Vitor on 31/05/2016.
  */
-public class Tiro implements ObjetoJogo {
-    private Ponto centro;
-    private double vy;
-    private double vx;
+public class Tiro extends ObjetoJogo {
     private static final int raio = 1;
     private static final Cor cor = new Cor("branco");
     public boolean removeFlag = false;
 
     public Tiro(Nave nave){
         centro = new Ponto(nave.getCentro().getX(),nave.getCentro().getY());
-        this.vx = nave.getVx()+100*Math.cos(nave.getAngulo());
-        this.vy = nave.getVy()+100*Math.sin(nave.getAngulo());
+        this.vx = nave.getVx()+200*Math.cos(nave.getAngulo());
+        this.vy = nave.getVy()+200*Math.sin(nave.getAngulo());
     }
 
     @Override
@@ -31,29 +28,5 @@ public class Tiro implements ObjetoJogo {
         if(centro.getX() > largTela || centro.getX() < 0 || centro.getY() > altTela || centro.getY() < 0){
             this.removeFlag = true;
         }
-    }
-
-    public Ponto getCentro() {
-        return centro;
-    }
-
-    public void setCentro(Ponto centro) {
-        this.centro = centro;
-    }
-
-    public double getVy() {
-        return vy;
-    }
-
-    public void setVy(double vy) {
-        this.vy = vy;
-    }
-
-    public double getVx() {
-        return vx;
-    }
-
-    public void setVx(double vx) {
-        this.vx = vx;
     }
 }

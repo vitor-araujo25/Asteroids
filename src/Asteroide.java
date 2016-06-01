@@ -1,12 +1,9 @@
 /**
  * Created by vitor on 18/05/16.
  */
-public class Asteroide implements ObjetoJogo{
-    private Ponto centro;
+public class Asteroide extends ObjetoJogo{
     private int tam;
     private Cor cor;
-    private double vx;
-    private double vy;
     private int raio;
 
     public Asteroide(double x, double y, int tam, double vx, double vy, Cor cor){
@@ -57,35 +54,11 @@ public class Asteroide implements ObjetoJogo{
         this.cor = cor;
     }
 
-    public double getVx() {
-        return vx;
-    }
-
-    public void setVx(double vx) {
-        this.vx = vx;
-    }
-
-    public double getVy() {
-        return vy;
-    }
-
-    public void setVy(double vy) {
-        this.vy = vy;
-    }
-
     public int getRaio() {
         return raio;
     }
 
     public void setRaio(int raio) {
         this.raio = raio;
-    }
-
-    public Ponto getCentro() {
-        return centro;
-    }
-
-    public void setCentro(Ponto centro) {
-        this.centro = centro;
     }
 }

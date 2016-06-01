@@ -1,10 +1,7 @@
 /**
  * Created by Vitor on 19/05/2016.
  */
-public class Nave implements ObjetoJogo{
-    private Ponto centro;
-    private double vx;
-    private double vy;
+public class Nave extends ObjetoJogo{
     private double angulo;
     public static final Cor cor = new Cor("branco");
 
@@ -93,35 +90,11 @@ public class Nave implements ObjetoJogo{
         angulo += Math.PI*dt;
     }
 
-    public double getVx() {
-        return vx;
-    }
-
-    public void setVx(double vx) {
-        this.vx = vx;
-    }
-
-    public double getVy() {
-        return vy;
-    }
-
-    public void setVy(double vy) {
-        this.vy = vy;
-    }
-
     public double getAngulo() {
         return angulo;
     }
 
     public void setAngulo(double angulo) {
         this.angulo = angulo;
-    }
-
-    public Ponto getCentro() {
-        return centro;
-    }
-
-    public void setCentro(Ponto centro) {
-        this.centro = centro;
     }
 }
