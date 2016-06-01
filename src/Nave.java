@@ -42,8 +42,12 @@ public class Nave extends ObjetoJogo{
     }
 
     public void acelera(){
-        vx += Math.cos(angulo);
-        vy += Math.sin(angulo);
+        if(vx < 300 && vx > -300){
+            vx += Math.cos(angulo);
+        }
+        if(vy < 300 && vy > -300){
+            vy += Math.sin(angulo);
+        }
     }
 
     public void atritoX(){

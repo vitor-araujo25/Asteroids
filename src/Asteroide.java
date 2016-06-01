@@ -5,14 +5,15 @@ public class Asteroide extends ObjetoJogo{
     private int tam;
     private Cor cor;
     private int raio;
+    private Hitbox hb;
 
     public Asteroide(double x, double y, int tam, double vx, double vy, Cor cor){
         centro = new Ponto(x,y);
-        this.setTam(tam);
-        this.setCor(cor);
-        this.setVx(vx);
-        this.setVy(vy);
-        this.setRaio((15*tam)/2);
+        this.tam = tam;
+        this.cor = cor;
+        this.vx = vx;
+        this.vy = vy;
+        this.raio = (15*tam)/2;
     }
 
     @Override
@@ -60,5 +61,13 @@ public class Asteroide extends ObjetoJogo{
 
     public void setRaio(int raio) {
         this.raio = raio;
+    }
+
+    public Hitbox getHb() {
+        return hb;
+    }
+
+    public void setHb(Hitbox hb) {
+        this.hb = hb;
     }
 }

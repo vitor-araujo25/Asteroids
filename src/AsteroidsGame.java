@@ -18,8 +18,8 @@ public class AsteroidsGame implements Jogo{
             asts[i] = new Asteroide(800 * Math.random(), //x
                     600 * Math.random(),  //y
                     ThreadLocalRandom.current().nextInt(1, 5), //tamanho
-                    Math.pow((-1),ThreadLocalRandom.current().nextInt(1, 3))*(Math.random()*50 + 50), //velocidade_x
-                    Math.pow((-1),ThreadLocalRandom.current().nextInt(1, 3))*(Math.random()*50 + 50), //velocidade_y
+                    Math.pow((-1),ThreadLocalRandom.current().nextInt(1, 3))*(Math.random()*50 + 80), //velocidade_x
+                    Math.pow((-1),ThreadLocalRandom.current().nextInt(1, 3))*(Math.random()*50 + 80), //velocidade_y
                     new Cor(Math.random(), Math.random(), Math.random()) //cor
             );
         }
@@ -43,13 +43,13 @@ public class AsteroidsGame implements Jogo{
         for(Asteroide a: asts){
             a.mover(getAltura(),getLargura(),dt);
         }
-        if(teclas.contains("left") || teclas.contains("esquerda")){
+        if(teclas.contains("left") || teclas.contains("esquerda") || teclas.contains("a")){
             nave.giraEsquerda(dt);
         }
-        if(teclas.contains("right") || teclas.contains("direita")){
+        if(teclas.contains("right") || teclas.contains("direita") || teclas.contains("d")){
             nave.giraDireita(dt);
         }
-        if(teclas.contains("up") || teclas.contains("acima")) {
+        if(teclas.contains("up") || teclas.contains("acima") || teclas.contains("w")) {
             nave.acelera();
         }else{
             if(nave.getVx() != 0){
@@ -80,7 +80,7 @@ public class AsteroidsGame implements Jogo{
     }
 
     public void tecla(String tecla){
-        if(tecla.equals("space") || tecla.equals("espaço")){
+        if(tecla.equals("space") || tecla.equals("espaço") || tecla.equals("k")){
             tiros.add(new Tiro(nave));
         }
 

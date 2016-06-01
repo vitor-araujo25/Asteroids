@@ -8,8 +8,8 @@ public class Tiro extends ObjetoJogo {
 
     public Tiro(Nave nave){
         centro = new Ponto(nave.getCentro().getX(),nave.getCentro().getY());
-        this.vx = nave.getVx()+200*Math.cos(nave.getAngulo());
-        this.vy = nave.getVy()+200*Math.sin(nave.getAngulo());
+        this.vx = nave.getVx()+250*Math.cos(nave.getAngulo());
+        this.vy = nave.getVy()+250*Math.sin(nave.getAngulo());
     }
 
     @Override
