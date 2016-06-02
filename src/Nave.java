@@ -3,7 +3,6 @@
  */
 public class Nave extends ObjetoJogo{
     private double angulo;
-    public static final Cor cor = new Cor("branco");
 
     public Nave(double x, double y, double vx, double vy){
         centro = new Ponto(x,y);
@@ -23,24 +22,27 @@ public class Nave extends ObjetoJogo{
             p.rotacionar(angulo);
         }
 
+        //parte branca da nave
         t.triangulo(vertices[0].getX()+centro.getX(),
                     vertices[0].getY()+centro.getY(),
                     vertices[1].getX()+centro.getX(),
                     vertices[1].getY()+centro.getY(),
                     vertices[2].getX()+centro.getX(),
                     vertices[2].getY()+centro.getY(),
-                    cor
+                    Cor.BRANCO
         );
 
+        //parte preta da nave
         t.triangulo(centro.getX(),centro.getY(),
                     vertices[1].getX()+centro.getX(),
                     vertices[1].getY()+centro.getY(),
                     vertices[2].getX()+centro.getX(),
                     vertices[2].getY()+centro.getY(),
-                    new Cor(0,0,0)
+                    Cor.PRETO
         );
     }
 
+    //velocidade limitada a 300 px/s
     public void acelera(){
         if(vx < 300 && vx > -300){
             vx += Math.cos(angulo);
@@ -50,6 +52,9 @@ public class Nave extends ObjetoJogo{
         }
     }
 
+
+    //"freio" da nave
+    //quando o jogador para de acelerar, a nave perde velocidade gradualmente até parar
     public double atrito(double v){
         if(v > 0){
             if(v < 1){
@@ -94,6 +99,7 @@ public class Nave extends ObjetoJogo{
         }
     }
 
+    //põe a nave de volta no centro da tela com rotação 0 e velocidade 0
     public void reset(int altTela, int largTela){
         centro.setX((double)largTela/2);
         centro.setY((double)altTela/2);

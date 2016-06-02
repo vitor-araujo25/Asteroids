@@ -17,6 +17,8 @@ public class AsteroidsGame implements Jogo{
     static int score = 0;
     static boolean gameOver = false;
     static boolean gameStart = false;
+
+    //tempo atual no momento do reset da nave (ou quando programa é aberto)
     static long t0;
 
 
@@ -36,6 +38,8 @@ public class AsteroidsGame implements Jogo{
         tiros = new HashSet<>();
     }
 
+    //aumenta os pontos de acordo com o tamanho do asteroide atingido
+    //quanto menor o asteroide, mais pontos ganhos
     public void pontuador(int tam){
         score += (5-tam)*10;
     }
@@ -53,7 +57,10 @@ public class AsteroidsGame implements Jogo{
     }
 
     public void tique(Set<String> teclas, double dt){
+
+        //tempo passado desde o ultimo reset da nave (ultima "morte")
         long tf = System.currentTimeMillis() - t0;
+
         if(!gameOver && tf > 1000){
             if (teclas.contains("left") || teclas.contains("esquerda") || teclas.contains("a")) {
                 nave.giraEsquerda(dt);
@@ -126,7 +133,7 @@ public class AsteroidsGame implements Jogo{
             /*
             *   cria asteroides novos se a quantidade de asteroides na tela for menor que 4
             *   a quantidade de novos asteroides criados vai aumentando de acordo com a quantidade de
-            *   vezes que os asteroides na tela foram reduzidos a menos de 4, até um limite de mais 8 asteroides
+            *   vezes que os asteroides na tela foram reduzidos a menos de 4, até um limite de mais 7 asteroides
             */
             if (asteroides.size() < 4) {
                 for(int i = 0; i < quantidadeAsteroidesNovos; i++){
@@ -137,7 +144,7 @@ public class AsteroidsGame implements Jogo{
                             new Cor(generator.nextInt(236)+20, generator.nextInt(236)+20, generator.nextInt(236)+20) //cor
                     ));
                 }
-                if(quantidadeAsteroidesNovos < 8){
+                if(quantidadeAsteroidesNovos < 7){
                     quantidadeAsteroidesNovos++;
                 }
             }
@@ -179,6 +186,8 @@ public class AsteroidsGame implements Jogo{
         tela.texto(Integer.toString(vidas),95,80,40,Cor.BRANCO);
         tela.texto("Pontos",getLargura()-140,40,20,Cor.BRANCO);
         tela.texto(Integer.toString(score),getLargura()-145,80,40,Cor.BRANCO);
+
+        //texto de instruções iniciais (só aparece enquanto o jogador não acelerou ou não atirou)
         if(!gameStart){
             tela.texto("Bem-vindo ao Asteroids!",300,60,20,Cor.BRANCO);
             tela.texto("Acelere [W] ou [up] para começar!",250,500,20,Cor.BRANCO);
