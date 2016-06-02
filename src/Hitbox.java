@@ -21,7 +21,7 @@ public class Hitbox {
                 break;
             case "Nave":
                 if(Math.sqrt(Math.pow(a.getCentro().getX()-obj.getCentro().getX(),2) +
-                        Math.pow(a.getCentro().getY()-obj.getCentro().getY(),2)) < a.getRaio()+5){
+                        Math.pow(a.getCentro().getY()-obj.getCentro().getY(),2)) < a.getRaio()+12){
                     colisaoNave = true;
                 }
                 break;

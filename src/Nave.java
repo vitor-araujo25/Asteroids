@@ -15,9 +15,9 @@ public class Nave extends ObjetoJogo{
     @Override
     public void desenhar(Tela t){
         Ponto[] vertices = new Ponto[3];
-        vertices[0] = new Ponto(10,0);
-        vertices[1] = new Ponto(-8,-9);
-        vertices[2] = new Ponto(-8,9);
+        vertices[0] = new Ponto(15,0);
+        vertices[1] = new Ponto(-12,-13.5);
+        vertices[2] = new Ponto(-12,13.5);
 
         for(Ponto p: vertices){
             p.rotacionar(angulo);
@@ -50,36 +50,29 @@ public class Nave extends ObjetoJogo{
         }
     }
 
-    public void atritoX(){
-        if(vx > 0){
-            if(vx < 1){
-                vx = 0;
+    public double atrito(double v){
+        if(v > 0){
+            if(v < 1){
+                v = 0;
             }else{
-                vx -= 1;
+                v -= 1;
             }
         }else{
-            if(vx > -1){
-                vx = 0;
+            if(v > -1){
+                v = 0;
             }else{
-                vx += 1;
+                v += 1;
             }
         }
+        return v;
     }
 
-    public void atritoY(){
-        if(vy > 0){
-            if(vy < 1){
-                vy = 0;
-            }else{
-                vy -= 1;
-            }
-        }else{
-            if(vy > -1){
-                vy = 0;
-            }else{
-                vy += 1;
-            }
-        }
+    public void giraEsquerda(double dt){
+        angulo -= 1.5*Math.PI*dt;
+    }
+
+    public void giraDireita(double dt){
+        angulo += 1.5*Math.PI*dt;
     }
 
     @Override
@@ -105,14 +98,6 @@ public class Nave extends ObjetoJogo{
         centro.setX((double)largTela/2);
         centro.setY((double)altTela/2);
         angulo = vx = vy = 0;
-    }
-
-    public void giraEsquerda(double dt){
-        angulo -= Math.PI*dt;
-    }
-
-    public void giraDireita(double dt){
-        angulo += Math.PI*dt;
     }
 
     public double getAngulo() {
