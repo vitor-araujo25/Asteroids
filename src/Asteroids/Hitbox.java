@@ -1,3 +1,5 @@
+package Asteroids;
+
 /**
  * Created by vitor on 01/06/16.
  */
@@ -12,14 +14,14 @@ public class Hitbox {
 
     public void distancia(ObjetoJogo obj){
         switch(obj.getClass().getName()){
-            case "Tiro":
+            case "Asteroids.Tiro":
                 if(Math.sqrt(Math.pow((a.getCentro().getX()-obj.getCentro().getX()),2) +
                         Math.pow((a.getCentro().getY()-obj.getCentro().getY()),2)) < a.getRaio()){
                     destruido = true;
                     ((Tiro)obj).removeFlag = true;
                 }
                 break;
-            case "Nave":
+            case "Asteroids.Nave":
                 if(Math.sqrt(Math.pow(a.getCentro().getX()-obj.getCentro().getX(),2) +
                         Math.pow(a.getCentro().getY()-obj.getCentro().getY(),2)) < a.getRaio()+12){
                     colisaoNave = true;

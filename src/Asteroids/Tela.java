@@ -1,10 +1,12 @@
+package Asteroids;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.FontMetrics;
 
 /**
- * Tela para desenho.
+ * Asteroids.Tela para desenho.
  * 
  */
 public class Tela

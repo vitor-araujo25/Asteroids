@@ -1,3 +1,4 @@
+package Asteroids;
 
 /**
  * Cores em RGB

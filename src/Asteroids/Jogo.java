@@ -1,3 +1,5 @@
+package Asteroids;
+
 import java.util.Set;
 
 public interface Jogo {

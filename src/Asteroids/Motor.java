@@ -1,3 +1,5 @@
+package Asteroids;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -21,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.Canvas;
 
 /**
- * Motor do jogo, gerencia a parte grÃ¡fica e os eventos
+ * Asteroids.Motor do jogo, gerencia a parte grÃ¡fica e os eventos
  */
 public class Motor
 {

@@ -1,3 +1,5 @@
+package Asteroids;
+
 /**
  * Created by Vitor on 19/05/2016.
  */
